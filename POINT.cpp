@@ -32,23 +32,37 @@ point::point(std::string filedir){
     cout<<endl<<"read success "<<endl<<"point count:"<<count<<endl;
 };
 void point::show_data(){
+    ofstream fout;
+    fout.open("/Users/saong/Desktop/big.pts",ios::out|ios::trunc);
+//    fout<<pointCloudPtr->size();
+    size_t p_Count=pointCloudPtr->size()/2;
+      fout<<p_Count;
+//    for(pcl::PointCloud<pcl::PointXYZ>::iterator it = pointCloudPtr->begin(); it
+//         != pointCloudPtr->end(); it++){
+//
+//        fout<<endl<<it->x<<" "<<it->y<<" "<<it->z<<0<<" "<<0<<" "<<0<<" "<<0;
+//
+//    }
+    for(size_t i = 0;i<p_Count; i++){
 
-    for(pcl::PointCloud<pcl::PointXYZ>::iterator it = pointCloudPtr->begin(); it
-         != pointCloudPtr->end(); it++){
-        cout<<endl<<it->x<<" "<<it->y<<" "<<it->z;
-        
+        fout<<endl<<pointCloudPtr->at(i).x<<" "<<pointCloudPtr->at(i).y<<" "<<pointCloudPtr->at(i).z<<0<<" "<<0<<" "<<0<<" "<<0;
+
     }
+    fout.close();
 };
 
 void point::visualization(){
     
-    int showpoint = 0;
     pcl::visualization::PCLVisualizer *viewer;
     viewer = new pcl::visualization::PCLVisualizer("point cloud viewer");
-    viewer->createViewPort (0.0, 0, 0.5, 1.0, showpoint);
-    viewer->setBackgroundColor(0, 0, 0);
-    viewer->addPointCloud<pcl::PointXYZ> (pointCloudPtr, "point cloud viewer",showpoint);
-    viewer->spin();
+
+    viewer->addPointCloud<pcl::PointXYZ> (pointCloudPtr, "point cloud viewer");
+ 
+    while (!viewer->wasStopped())
+    {
+        viewer->spinOnce();
+    }
+//    viewer->spin();
     
 };
     

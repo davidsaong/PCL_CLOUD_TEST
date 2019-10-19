@@ -11,7 +11,9 @@
 int main(int argc, const char * argv[]) {
     
     point p("/Users/saong/Desktop/台科大掃描1.las");
-        
+    
+    p.show_data();
+    
     p.visualization();
     
     cout<<endl;

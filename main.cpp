@@ -7,8 +7,14 @@
 //
 
 #include <iostream>
-
+#include "POINT.hpp"
 int main(int argc, const char * argv[]) {
-
+    
+    point p("/Users/saong/Desktop/台科大掃描1.las");
+        
+    p.visualization();
+    
+    cout<<endl;
+    
     return 0;
 }
